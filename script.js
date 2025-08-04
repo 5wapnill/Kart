@@ -1,6 +1,12 @@
 let catagories = ['Smartphone','Laptop','Automobile','Watch'];
 let catContainer = document.querySelector('.catagories');
 
+fetch('https://dummyjson.com/products/category/smartphones?limit=50')
+.then(res => res.json())
+.then(data => console.log(data));
+
+
+
 
 let searchbar = document.querySelector(".searchBar");
 console.log(searchbar);
