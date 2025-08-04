@@ -1,0 +1,94 @@
+@font-face {
+  font-family: 'kamos';
+  src: url('assets/fonts/Kamos.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'coco';
+    src: url('assets/fonts/Cocogoose-Classic-Medium-trial.ttf')  format('truetype');
+}
+
+
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    /* outline: solid 1px red; */
+    
+}
+
+body {
+    font-family: coco;
+  background-color: rgb(255, 255, 255);
+}
+
+.heroPage{
+    padding: 2vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.heading{
+    font-family: 'kamos';
+    font-size: 8vw;
+}
+.searchBar{
+    width: 80%;
+    height: 4em;
+    max-width: 800px;
+}
+.catagories{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 10vw;
+}
+.cat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
