@@ -34,11 +34,24 @@ body {
     font-family: 'kamos';
     font-size: 8vw;
 }
-.searchBar{
+.searchBarDiv{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
     width: 80%;
     height: 4em;
     max-width: 800px;
+    border: solid 3px black;
+    border-radius: 10px;
 }
+.searchBar{
+    width: 100%;
+    padding: 20px;
+    border: none;
+    outline: none;
+}
+
+
 .catagories{
     display: flex;
     justify-content: space-around;
