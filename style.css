@@ -1,3 +1,11 @@
+:root {
+    --primary-color: rgb(255, 226, 226);
+    --secondary-color: rgb(255, 255, 255);
+    --border-color: black;
+    --hover-color: rgb(173, 185, 209);
+}
+
+
 @font-face {
   font-family: 'kamos';
   src: url('assets/fonts/Kamos.ttf') format('truetype');
@@ -49,7 +57,7 @@ body {
     width: 80%;
     height: 4em;
     max-width: 800px;
-    border: solid 3px black;
+    border: solid 3px var(--border-color);
     border-radius: 10px;
 }
 .searchBar{
@@ -72,8 +80,14 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 2vh;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
 }
-
+.cat:hover{
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+}
 .products{
     display: flex;
     flex-wrap: wrap;
@@ -89,9 +103,13 @@ body {
     gap: 1em;
     font-size: 1.5em;
     width: 300px;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    background-color: var(--secondary-color);
 }
-.pdiv :hover{
-    background-color: rgb(179, 179, 179);
+.pdiv:hover{
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
 }
 
 
