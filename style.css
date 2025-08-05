@@ -1,6 +1,6 @@
 :root {
     --primary-color: rgb(255, 226, 226);
-    --secondary-color: rgb(255, 255, 255);
+    --secondary-color: rgba(255, 255, 255, 0.507);
     --border-color: black;
     --hover-color: rgb(173, 185, 209);
 }
@@ -111,11 +111,8 @@ body {
     background-color: var(--hover-color);
     transform: translateY(-2px);
 }
-
-
 .pdiv img{
     width: 300px;
-    min-width:100px;
     object-fit: cover;
     border-radius: 10px;
 }

@@ -22,7 +22,7 @@ const totalProducts = ['Smartphones', 'Laptops','mens-watches','womens-watches',
 
 totalProducts.forEach(item => {
 
-fetch(`https://dummyjson.com/products/category/${item}?limit=50`)
+fetch(`https://dummyjson.com/products/category/${item}?limit=5`)
     .then(res => res.json())
     .then(result => {
         data = result;
@@ -39,6 +39,6 @@ fetch(`https://dummyjson.com/products/category/${item}?limit=50`)
             ${item.price}$
             `
             Products.append(pContainer);
-        })
+        });
     });
 });
