@@ -20,6 +20,8 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+    transition: all 0.3s ease-out;
+
     /* outline: solid 1px red; */
     
 }
@@ -103,7 +105,6 @@ body {
     gap: 1em;
     font-size: 1.5em;
     width: 300px;
-    transition: all 0.3s ease;
     border-radius: 10px;
     background-color: var(--secondary-color);
 }

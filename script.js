@@ -22,7 +22,7 @@ const totalProducts = ['Smartphones', 'Laptops','mens-watches','womens-watches',
 
 totalProducts.forEach(item => {
 
-fetch(`https://dummyjson.com/products/category/${item}?limit=5`)
+fetch(`https://dummyjson.com/products/category/${item}?limit=6`)
     .then(res => res.json())
     .then(result => {
         data = result;
