@@ -18,7 +18,6 @@
 
 body {
     font-family: 'roboto', sans-serif;
-  background-color: rgb(255, 255, 255);
 }
 
 .bg{
@@ -92,7 +91,7 @@ body {
     width: 300px;
 }
 .pdiv :hover{
-    background-color: rgb(255, 176, 170);
+    background-color: rgb(179, 179, 179);
 }
 
 

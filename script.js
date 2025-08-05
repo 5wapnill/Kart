@@ -18,11 +18,11 @@ catagories.forEach(item => {
 // trying to fetch data and create element
 const Products = document.querySelector('.products');
 
-const totalProducts = ['Smartphones', 'Laptops', 'Motorcycle'];
+const totalProducts = ['Smartphones', 'Laptops','mens-watches','womens-watches', 'Motorcycle'];
 
 totalProducts.forEach(item => {
 
-fetch(`https://dummyjson.com/products/category/${item}?limit=3`)
+fetch(`https://dummyjson.com/products/category/${item}?limit=50`)
     .then(res => res.json())
     .then(result => {
         data = result;
