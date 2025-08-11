@@ -1,44 +1,56 @@
 let catagories = ['Smartphone', 'Laptop', 'Automobile', 'Watch'];
 let catContainer = document.querySelector('.catagories');
-
-
 let searchbar = document.querySelector(".searchBar");
+const totalProducts = ['smartphones', 'laptops', 'motorcycle', 'mens-watches'];
 
-catagories.forEach(item => {
+catagories.forEach((item, index) => {
     const cat = document.createElement('div');
     cat.className = 'cat';
-    cat.innerHTML =
-    `
-    <img src="assets/svg/${item}.svg" width="40vw">
-    <h5>${item}</h5>
+    cat.innerHTML = `
+        <a href="#${totalProducts[index]}">
+            <img src="assets/svg/${item}.svg" width="40vw">
+            <h5>${item}</h5>
+        </a>
     `;
     catContainer.append(cat);
 });
 
-// trying to fetch data and create element
+
 const Products = document.querySelector('.products');
 
-const totalProducts = ['Smartphones', 'Laptops','mens-watches','womens-watches', 'Motorcycle'];
+Products.innerHTML = '';
 
-totalProducts.forEach(item => {
+totalProducts.forEach(category => {
+    const section = document.createElement('div');
+    section.id = category.toLowerCase();
+    section.className = 'product-section';
+    
+    const heading = document.createElement('h2');
+    heading.className = 'section-heading';
+    heading.textContent = category;
+    section.appendChild(heading);
 
-fetch(`https://dummyjson.com/products/category/${item}?limit=6`)
-    .then(res => res.json())
-    .then(result => {
-        data = result;
-        searchbar.placeholder = `eg. ${data.products[0].title}`;
-        
-        data.products.forEach(item => {
-            const pContainer = document.createElement('div');
-            pContainer.className = 'pdiv';
-            pContainer.innerHTML =
-            `
-            <img src="${item.images[0]}"/>
-            ${item.title}
-            <br>
-            ${item.price}$
-            `
-            Products.append(pContainer);
+    const productContainer = document.createElement('div');
+    productContainer.className = 'product-container';
+    section.appendChild(productContainer);
+
+    fetch(`https://dummyjson.com/products/category/${category}?limit=8`)
+        .then(res => res.json())
+        .then(data => {
+
+                searchbar.placeholder = `eg. ${data.products[0].title}`;
+
+            data.products.forEach(product => {
+                const pContainer = document.createElement('div');
+                pContainer.className = 'pdiv';
+                pContainer.innerHTML = `
+                    <img src="${product.images[0]}"/>
+                    ${product.title}
+                    <br>
+                    ${product.price}$
+                `;
+                productContainer.appendChild(pContainer);
+            });
         });
-    });
+    Products.appendChild(section);
 });
