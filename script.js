@@ -60,6 +60,15 @@ function showProducts() {
                     `;
                     productContainer.appendChild(pContainer);
 
+                    atcFunction(pContainer);
+                });
+            });
+        Products.appendChild(section);
+    });
+}
+
+function atcFunction(pContainer) {
+    
                     const atc = pContainer.querySelector('.atc');
                     let quantity = 0;
 
@@ -94,8 +103,4 @@ function showProducts() {
                             
                         }
                     }
-                });
-            });
-        Products.appendChild(section);
-    });
 }
