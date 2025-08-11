@@ -21,6 +21,8 @@
     padding: 0px;
     box-sizing: border-box;
     transition: all 0.3s ease-out;
+    
+    user-select: none;
 
     /* outline: solid 1px red; */
     
