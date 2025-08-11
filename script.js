@@ -25,47 +25,77 @@ function showCatagories() {
 }
 
 function showProducts() {
-  
+    const Products = document.querySelector('.products');
+    Products.innerHTML = '';
 
-const Products = document.querySelector('.products');
+    totalProducts.forEach(category => {
+        const section = document.createElement('div');
+        section.id = category.toLowerCase();
+        section.className = 'product-section';
+        
+        const heading = document.createElement('h2');
+        heading.className = 'section-heading';
+        heading.textContent = category;
+        section.appendChild(heading);
 
-Products.innerHTML = '';
+        const productContainer = document.createElement('div');
+        productContainer.className = 'product-container';
+        section.appendChild(productContainer);
 
-totalProducts.forEach(category => {
-    const section = document.createElement('div');
-    section.id = category.toLowerCase();
-    section.className = 'product-section';
-    
-    const heading = document.createElement('h2');
-    heading.className = 'section-heading';
-    heading.textContent = category;
-    section.appendChild(heading);
+        fetch(`https://dummyjson.com/products/category/${category}?limit=6`)
+            .then(res => res.json())
+            .then(data => {
+                data.products.forEach(product => {
+                    const pContainer = document.createElement('div');
+                    pContainer.className = 'pdiv';
+                    pContainer.innerHTML = `
+                        <img src="${product.images[0]}"/>
+                        <div class="title">
+                        ${product.title.toUpperCase()}
+                        </div>
+                        <div class="price">
+                        ${Math.floor(product.price*90)}₹
+                        </div>
+                        <div class="atc" data-id="${product.id}">Add to cart</div>
+                    `;
+                    productContainer.appendChild(pContainer);
 
-    const productContainer = document.createElement('div');
-    productContainer.className = 'product-container';
-    section.appendChild(productContainer);
+                    const atc = pContainer.querySelector('.atc');
+                    let quantity = 0;
 
-    fetch(`https://dummyjson.com/products/category/${category}?limit=6`)
-        .then(res => res.json())
-        .then(data => {
-            searchbar.placeholder = `eg. ${data.products[0].title}`;
+                    atc.addEventListener('click', function(e) {
+                        const clickedElement = e.target;
+                        
+                        if (clickedElement.classList.contains('plus')) {
+                            updateCart(this, quantity + 1);
+                        } 
+                        else if (clickedElement.classList.contains('minus')) {
+                            updateCart(this, quantity - 1);
+                        }
+                        else if (quantity === 0) {
+                            updateCart(this, 1);
+                        }
+                    });
 
-            data.products.forEach(product => {
-                const pContainer = document.createElement('div');
-                pContainer.className = 'pdiv';
-                pContainer.innerHTML = `
-                    <img src="${product.images[0]}"/>
-                    <div class = "title">
-                    ${product.title.toUpperCase()}
-                    </div>
-                    <div class = "price">
-                    ${Math.floor(product.price*90)}₹
-                    </div>
-                    <button>Add to cart</button>
-                `;
-                productContainer.appendChild(pContainer);
+                    function updateCart(button, qty) {
+                        quantity = qty;
+                        if(quantity <= 0) {
+                            button.innerHTML = 'Add to Cart';
+                            atc.style.backgroundColor = 'rgba(189, 189, 189, 0.342)';
+                            atc.style.color = 'black';
+                        } else {
+                            button.innerHTML = `
+                                <div class="inDiv minus">-</div>
+                                <div class="inDiv">${quantity}</div>
+                                <div class="inDiv plus">+</div>
+                            `;
+                            atc.style.backgroundColor = 'black';
+                            atc.style.color = 'white';
+                            
+                        }
+                    }
+                });
             });
-        });
-    Products.appendChild(section);
-});
+        Products.appendChild(section);
+    });
 }
