@@ -1,6 +1,5 @@
 let catagories = ['Smartphone', 'Laptop', 'Automobile', 'Watch'];
 let catContainer = document.querySelector('.catagories');
-let searchbar = document.querySelector(".searchBar");
 const totalProducts = ['smartphones', 'laptops', 'motorcycle', 'mens-watches'];
 // const totalProducts = ['smartphones'];
 

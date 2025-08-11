@@ -54,25 +54,6 @@ body {
     font-family: 'kamos';
     font-size: 8vw;
 }
-.searchBarDiv{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    width: 60vw;
-    height: 4em;
-    max-width: 800px;
-    border: solid 3px var(--border-color);
-    border-radius: 10px;
-}
-.searchBar{
-    width: 100%;
-    padding: 20px;
-    border: none;
-    outline: none;
-    background: none;
-}
-
 
 .catagories{
     display: flex;
