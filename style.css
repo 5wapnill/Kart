@@ -1,8 +1,8 @@
 :root {
     --primary-color: rgb(255, 226, 226);
-    --secondary-color: rgba(255, 255, 255, 0.507);
+    --secondary-color: rgba(255, 255, 255, 0.404);
     --border-color: black;
-    --hover-color: rgb(173, 185, 209);
+    --hover-color: rgb(255, 255, 255);
 }
 
 
@@ -27,7 +27,7 @@
 }
 
 body {
-    font-family: 'roboto', sans-serif;
+    font-family: monospace;
 }
 
 /* -------------------------------- */
@@ -57,6 +57,7 @@ body {
 .searchBarDiv{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px;
     width: 60vw;
     height: 4em;
@@ -94,6 +95,7 @@ body {
     transform: translateY(-2px);
 }
 .cat a {
+    font-size: 1.5em;
     text-decoration: none;
     color: inherit;
     display: flex;
@@ -111,6 +113,8 @@ body {
     gap: 2em;
     padding: 20px;
 }
+
+/* ---------Card--------- */
 .pdiv{
     display: flex;
     flex-direction: column;
@@ -132,6 +136,24 @@ body {
     border-radius: 10px;
 }
 
+button{
+    cursor: pointer;
+    width: 80%;
+    height: 50px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-weight: 300;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.137);
+    color: black;
+}
+button:hover{
+    background-color: black;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ----------------------- */
 .product-section {
     padding: 2em 0;
     margin: 2em 0;

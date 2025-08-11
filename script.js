@@ -2,8 +2,16 @@ let catagories = ['Smartphone', 'Laptop', 'Automobile', 'Watch'];
 let catContainer = document.querySelector('.catagories');
 let searchbar = document.querySelector(".searchBar");
 const totalProducts = ['smartphones', 'laptops', 'motorcycle', 'mens-watches'];
+// const totalProducts = ['smartphones'];
 
-catagories.forEach((item, index) => {
+showCatagories();
+showProducts();
+
+
+
+
+function showCatagories() {
+  catagories.forEach((item, index) => {
     const cat = document.createElement('div');
     cat.className = 'cat';
     cat.innerHTML = `
@@ -14,7 +22,10 @@ catagories.forEach((item, index) => {
     `;
     catContainer.append(cat);
 });
+}
 
+function showProducts() {
+  
 
 const Products = document.querySelector('.products');
 
@@ -34,7 +45,7 @@ totalProducts.forEach(category => {
     productContainer.className = 'product-container';
     section.appendChild(productContainer);
 
-    fetch(`https://dummyjson.com/products/category/${category}?limit=4`)
+    fetch(`https://dummyjson.com/products/category/${category}?limit=6`)
         .then(res => res.json())
         .then(data => {
             searchbar.placeholder = `eg. ${data.products[0].title}`;
@@ -44,12 +55,17 @@ totalProducts.forEach(category => {
                 pContainer.className = 'pdiv';
                 pContainer.innerHTML = `
                     <img src="${product.images[0]}"/>
-                    ${product.title}
-                    <br>
-                    ${product.price}$
+                    <div class = "title">
+                    ${product.title.toUpperCase()}
+                    </div>
+                    <div class = "price">
+                    ${Math.floor(product.price*90)}₹
+                    </div>
+                    <button>Add to cart</button>
                 `;
                 productContainer.appendChild(pContainer);
             });
         });
     Products.appendChild(section);
 });
+}
