@@ -34,11 +34,10 @@ totalProducts.forEach(category => {
     productContainer.className = 'product-container';
     section.appendChild(productContainer);
 
-    fetch(`https://dummyjson.com/products/category/${category}?limit=8`)
+    fetch(`https://dummyjson.com/products/category/${category}?limit=4`)
         .then(res => res.json())
         .then(data => {
-
-                searchbar.placeholder = `eg. ${data.products[0].title}`;
+            searchbar.placeholder = `eg. ${data.products[0].title}`;
 
             data.products.forEach(product => {
                 const pContainer = document.createElement('div');
