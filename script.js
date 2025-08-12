@@ -7,8 +7,7 @@ showCatagories();
 showProducts();
 
 
-
-
+// function to show svg per catagory
 function showCatagories() {
   catagories.forEach((item, index) => {
     const cat = document.createElement('div');
@@ -23,24 +22,29 @@ function showCatagories() {
 });
 }
 
+// function to load product card + add to cart function
 function showProducts() {
     const Products = document.querySelector('.products');
     Products.innerHTML = '';
 
     totalProducts.forEach(category => {
+        // adding section per catagory
         const section = document.createElement('div');
         section.id = category.toLowerCase();
         section.className = 'product-section';
         
+        // adding heading per catagory
         const heading = document.createElement('h2');
         heading.className = 'section-heading';
         heading.textContent = category;
         section.appendChild(heading);
 
+        // adding inner section per catagory
         const productContainer = document.createElement('div');
         productContainer.className = 'product-container';
         section.appendChild(productContainer);
 
+        // loading product card
         fetch(`https://dummyjson.com/products/category/${category}?limit=6`)
             .then(res => res.json())
             .then(data => {
@@ -59,6 +63,7 @@ function showProducts() {
                     `;
                     productContainer.appendChild(pContainer);
 
+                    // add to cart button function 
                     atcFunction(pContainer);
                 });
             });
@@ -66,6 +71,7 @@ function showProducts() {
     });
 }
 
+// function for add-to-cart button 
 function atcFunction(pContainer) {
     
                     const atc = pContainer.querySelector('.atc');
