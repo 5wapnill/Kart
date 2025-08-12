@@ -32,7 +32,7 @@ function showProducts() {
         const section = document.createElement('div');
         section.id = category.toLowerCase();
         section.className = 'product-section';
-      
+
         // adding heading per catagory
         const heading = document.createElement('h2');
         heading.className = 'section-heading';
@@ -59,48 +59,20 @@ function showProducts() {
                         <div class="price">
                         ${Math.floor(product.price * 90)}₹
                         </div>
-                        <div class="atc">Add to cart</div>
+                        <div class="atc" data-id="${product.id}">Add to cart</div>
                     `;
                     productContainer.appendChild(pContainer);
 
                     // add to cart button function 
                     atcFunction(pContainer);
+                });
             });
-          });
         Products.appendChild(section);
     });
 }
 
 // function for add-to-cart button 
 function atcFunction(pContainer) {
-    
-                    const atc = pContainer.querySelector('.atc');
-                    let quantity = 0;
-
-                    atc.addEventListener('click', function(e) {
-                        const clickedElement = e.target;
-                        
-                        if (clickedElement.classList.contains('plus')) {
-                            updateCart(this, quantity + 1);
-                        } 
-                        else if (clickedElement.classList.contains('minus')) {
-                            updateCart(this, quantity - 1);
-                        }
-                        else if (quantity === 0) {
-                            updateCart(this, 1);
-                        }
-                    });
-
-                    function updateCart(button, qty) {
-                        quantity = qty;
-                        if(quantity <= 0) {
-                            button.innerHTML = 'Add to Cart';
-                            atc.style.backgroundColor = 'rgba(189, 189, 189, 0.342)';
-                            atc.style.color = 'black';
-                        } else {
-                            button.innerHTML = `
-=======
-function atcFunction(pContainer, productId) {
 
     const atc = pContainer.querySelector('.atc');
     let quantity = 0;
@@ -117,7 +89,6 @@ function atcFunction(pContainer, productId) {
         else if (quantity === 0) {
             updateCart(this, 1);
         }
-        console.log(productId, quantity);
     });
 
     function updateCart(button, qty) {
