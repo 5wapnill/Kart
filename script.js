@@ -59,7 +59,7 @@ function showProducts() {
                         <div class="price">
                         ${Math.floor(product.price * 90)}₹
                         </div>
-                        <div class="atc" data-id="${product.id}">Add to cart</div>
+                        <div class="atc" id="${product.id}">Add to cart</div>
                     `;
                     productContainer.appendChild(pContainer);
 
