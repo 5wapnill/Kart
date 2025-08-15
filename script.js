@@ -2,9 +2,21 @@ let catagories = ['Smartphone', 'Laptop', 'Automobile', 'Watch'];
 let catContainer = document.querySelector('.catagories');
 const totalProducts = ['smartphones', 'laptops', 'motorcycle', 'mens-watches'];
 // const totalProducts = ['smartphones'];
-
+let all = [];
 showCatagories();
 showProducts();
+
+function cart(all) {
+    for (let i = 0; i < all.length - 1; i++) {
+        for (let j = i + 1; j < all.length; j++) {
+            if (all[i].id === all[j].id) {
+                all.splice(i, 1);
+                i--;
+                break;
+            }
+        }
+    }
+}
 
 
 // function to show svg per catagory
@@ -89,6 +101,16 @@ function atcFunction(pContainer) {
         else if (quantity === 0) {
             updateCart(this, 1);
         }
+
+            all.push({
+        id: pContainer.querySelector('.atc').id,
+        quantity: quantity
+    });
+
+        cart(all);
+
+        console.log(all);
+
     });
 
     function updateCart(button, qty) {
