@@ -2,11 +2,14 @@ let catagories = ['Smartphone', 'Laptop', 'Automobile', 'Watch'];
 let catContainer = document.querySelector('.catagories');
 const totalProducts = ['smartphones', 'laptops', 'motorcycle', 'mens-watches'];
 // const totalProducts = ['smartphones'];
+let cart = document.querySelector('.cartBtn');
 let all = [];
 showCatagories();
 showProducts();
+showCartButton(all);
 
-function cart(all) {
+
+function cartQuantity(all) {
     for (let i = 0; i < all.length - 1; i++) {
         for (let j = i + 1; j < all.length; j++) {
             if (all[i].id === all[j].id) {
@@ -16,6 +19,23 @@ function cart(all) {
             }
         }
     }
+}
+
+function showCartButton(all) {
+    if( all.length == 0) {
+        cart.style.display = 'none';
+    }
+    else{
+        cart.style.display = 'flex';
+        let totalItem = 0;
+        const cartQuantity = document.querySelector('.cartQuantity');
+        cartQuantity.innerHTML = '';
+        all.forEach(item => {
+            totalItem += item.quantity;
+        })
+        cartQuantity.innerText = totalItem;
+
+}
 }
 
 
@@ -107,7 +127,9 @@ function atcFunction(pContainer) {
         quantity: quantity
     });
 
-        cart(all);
+        cartQuantity(all);
+showCartButton(all);
+
 
         console.log(all);
 

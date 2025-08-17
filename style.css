@@ -190,3 +190,23 @@ button:hover{
     place-items: center;
     cursor: pointer;
 }
+
+/* -------------- Cart -------------- */
+
+.cartBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 20px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-family: 'kamos';
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
