@@ -2,9 +2,7 @@ let catagories = ['Smartphone', 'Laptop', 'Automobile', 'Watch'];
 let catContainer = document.querySelector('.catagories');
 const totalProducts = ['smartphones', 'laptops', 'motorcycle', 'mens-watches'];
 // const totalProducts = ['smartphones'];
-
 let cart = document.querySelector('.cartBtn');
-
 let all = [];
 showCatagories();
 showProducts();
@@ -24,10 +22,10 @@ function cartQuantity(all) {
 }
 
 function showCartButton(all) {
-    if( all.length == 0) {
+    if (all.length == 0) {
         cart.style.display = 'none';
     }
-    else{
+    else {
         cart.style.display = 'flex';
         let totalItem = 0;
         const cartQuantity = document.querySelector('.cartQuantity');
@@ -37,18 +35,6 @@ function showCartButton(all) {
         })
         cartQuantity.innerText = totalItem;
 
-}
-}
-
-function cart(all) {
-    for (let i = 0; i < all.length - 1; i++) {
-        for (let j = i + 1; j < all.length; j++) {
-            if (all[i].id === all[j].id) {
-                all.splice(i, 1);
-                i--;
-                break;
-            }
-        }
     }
 }
 
@@ -136,14 +122,14 @@ function atcFunction(pContainer) {
             updateCart(this, 1);
         }
 
-            all.push({
-        id: pContainer.querySelector('.atc').id,
-        quantity: quantity
-    });
-
+        all.push({
+            id: pContainer.querySelector('.atc').id,
+            quantity: quantity
+        });
 
         cartQuantity(all);
-         showCartButton(all);
+        showCartButton(all);
+
 
         console.log(all);
 
