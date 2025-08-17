@@ -2,7 +2,9 @@ let catagories = ['Smartphone', 'Laptop', 'Automobile', 'Watch'];
 let catContainer = document.querySelector('.catagories');
 const totalProducts = ['smartphones', 'laptops', 'motorcycle', 'mens-watches'];
 // const totalProducts = ['smartphones'];
+
 let cart = document.querySelector('.cartBtn');
+
 let all = [];
 showCatagories();
 showProducts();
@@ -36,6 +38,18 @@ function showCartButton(all) {
         cartQuantity.innerText = totalItem;
 
 }
+}
+
+function cart(all) {
+    for (let i = 0; i < all.length - 1; i++) {
+        for (let j = i + 1; j < all.length; j++) {
+            if (all[i].id === all[j].id) {
+                all.splice(i, 1);
+                i--;
+                break;
+            }
+        }
+    }
 }
 
 
@@ -127,9 +141,9 @@ function atcFunction(pContainer) {
         quantity: quantity
     });
 
-        cartQuantity(all);
-showCartButton(all);
 
+        cartQuantity(all);
+         showCartButton(all);
 
         console.log(all);
 
