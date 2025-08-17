@@ -1,13 +1,29 @@
 let catagories = ['Smartphone', 'Laptop', 'Automobile', 'Watch'];
 let catContainer = document.querySelector('.catagories');
 const totalProducts = ['smartphones', 'laptops', 'motorcycle', 'mens-watches'];
-// const totalProducts = ['smartphones'];
 let cart = document.querySelector('.cartBtn');
 let all = [];
+let allProducts = []; // Store all products for cart access
+
 showCatagories();
 showProducts();
 showCartButton(all);
 
+// Cart elements
+const cartPage = document.querySelector('.cartPage');
+const cartItemsContainer = document.querySelector('.cartItems');
+const totalElement = document.querySelector('.total');
+const closeCart = document.querySelector('.closeCart');
+
+// Toggle cart visibility
+cart.addEventListener('click', () => {
+    cartPage.classList.add('active');
+    renderCartItems();
+});
+
+closeCart.addEventListener('click', () => {
+    cartPage.classList.remove('active');
+});
 
 function cartQuantity(all) {
     for (let i = 0; i < all.length - 1; i++) {
@@ -34,10 +50,8 @@ function showCartButton(all) {
             totalItem += item.quantity;
         })
         cartQuantity.innerText = totalItem;
-
     }
 }
-
 
 // function to show svg per catagory
 function showCatagories() {
@@ -81,6 +95,9 @@ function showProducts() {
             .then(res => res.json())
             .then(data => {
                 data.products.forEach(product => {
+                    // Store product for cart access
+                    allProducts.push(product);
+                    
                     const pContainer = document.createElement('div');
                     pContainer.className = 'pdiv';
                     pContainer.innerHTML = `
@@ -105,51 +122,123 @@ function showProducts() {
 
 // function for add-to-cart button 
 function atcFunction(pContainer) {
-
     const atc = pContainer.querySelector('.atc');
-    let quantity = 0;
+    const id = atc.id;
 
-    atc.addEventListener('click', function (e) {
-        const clickedElement = e.target;
-
-        if (clickedElement.classList.contains('plus')) {
-            updateCart(this, quantity + 1);
-        }
-        else if (clickedElement.classList.contains('minus')) {
-            updateCart(this, quantity - 1);
-        }
-        else if (quantity === 0) {
-            updateCart(this, 1);
-        }
-
-        all.push({
-            id: pContainer.querySelector('.atc').id,
-            quantity: quantity
-        });
-
-        cartQuantity(all);
-        showCartButton(all);
-
-
-        console.log(all);
-
-    });
-
-    function updateCart(button, qty) {
-        quantity = qty;
-        if (quantity <= 0) {
-            button.innerHTML = 'Add to Cart';
-            atc.style.backgroundColor = 'rgba(189, 189, 189, 0.342)';
-            atc.style.color = 'black';
+    atc.addEventListener('click', function(e) {
+        if (e.target.classList.contains('plus')) {
+            updateCartItem(id, 1);
+        } else if (e.target.classList.contains('minus')) {
+            updateCartItem(id, -1);
         } else {
-            button.innerHTML = `
-                                <div class="inDiv minus">-</div>
-                                <div class="inDiv">${quantity}</div>
-                                <div class="inDiv plus">+</div>
-                            `;
-            atc.style.backgroundColor = 'black';
-            atc.style.color = 'white';
-
+            updateCartItem(id, 1);
         }
+    });
+}
+
+// Update cart item function
+function updateCartItem(id, change) {
+    // Find existing item
+    let item = all.find(item => item.id === id);
+    
+    if (item) {
+        item.quantity += change;
+        if (item.quantity <= 0) {
+            // Remove item if quantity is 0 or less
+            all = all.filter(i => i.id !== id);
+        }
+    } else if (change > 0) {
+        // Add new item
+        all.push({ id, quantity: 1 });
     }
+    
+    // Update UI
+    showCartButton(all);
+    updateProductCardButton(id);
+    
+    // Update cart page if open
+    if (cartPage.classList.contains('active')) {
+        renderCartItems();
+    }
+}
+
+// Update product card button display
+function updateProductCardButton(id) {
+    const button = document.querySelector(`.atc[id="${id}"]`);
+    if (!button) return;
+    
+    const item = all.find(i => i.id === id);
+    const quantity = item ? item.quantity : 0;
+    
+    if (quantity <= 0) {
+        button.innerHTML = 'Add to Cart';
+        button.style.backgroundColor = 'rgba(189, 189, 189, 0.342)';
+        button.style.color = 'black';
+    } else {
+        button.innerHTML = `
+            <div class="inDiv minus">-</div>
+            <div class="inDiv">${quantity}</div>
+            <div class="inDiv plus">+</div>
+        `;
+        button.style.backgroundColor = 'black';
+        button.style.color = 'white';
+    }
+}
+
+// Function to render cart items
+function renderCartItems() {
+    cartItemsContainer.innerHTML = '';
+    let total = 0;
+    
+    // Group items by ID
+    const groupedItems = {};
+    all.forEach(item => {
+        if (groupedItems[item.id]) {
+            groupedItems[item.id].quantity += item.quantity;
+        } else {
+            groupedItems[item.id] = {...item};
+        }
+    });
+    
+    // Render each item
+    Object.values(groupedItems).forEach(item => {
+        const product = allProducts.find(p => p.id == item.id);
+        if (!product) return;
+        
+        const itemTotal = Math.floor(product.price * 90) * item.quantity;
+        total += itemTotal;
+        
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cartItem';
+        cartItem.innerHTML = `
+            <img src="${product.images[0]}" alt="${product.title}">
+            <div class="cartItemInfo">
+                <div class="cartItemTitle">${product.title}</div>
+                <div class="cartItemPrice">${Math.floor(product.price * 90)}₹ × ${item.quantity}</div>
+                <div class="cartItemControls">
+                    <button class="removeItem" data-id="${item.id}">-</button>
+                    <span>${item.quantity}</span>
+                    <button class="addItem" data-id="${item.id}">+</button>
+                </div>
+            </div>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+    });
+    
+    totalElement.textContent = `Total: ${total}₹`;
+    
+    // Add event listeners to control buttons
+    document.querySelectorAll('.addItem').forEach(button => {
+        button.addEventListener('click', () => {
+            const id = button.dataset.id;
+            updateCartItem(id, 1);
+        });
+    });
+    
+    document.querySelectorAll('.removeItem').forEach(button => {
+        button.addEventListener('click', () => {
+            const id = button.dataset.id;
+            updateCartItem(id, -1);
+        });
+    });
 }
