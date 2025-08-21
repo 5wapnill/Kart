@@ -20,7 +20,7 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    transition: all 0.3s ease-out;
+    /* transition: all 0.3s ease-out; */
     
     user-select: none;
 
@@ -30,6 +30,7 @@
 
 body {
     font-family: monospace;
+    overflow-x: hidden;
 }
 
 /* -------------------------------- */
@@ -70,12 +71,10 @@ body {
     gap: 2vh;
     padding: 20px;
     border-radius: 10px;
-    transition: all 0.3s ease;
     cursor: pointer;
 }
 .cat:hover{
     background-color: var(--hover-color);
-    transform: translateY(-2px);
 }
 .cat a {
     font-size: 1.5em;
