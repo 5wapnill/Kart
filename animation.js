@@ -6,8 +6,10 @@ let dration = 0.5;
 
 
 time.from(".heading h1", {
-        scale: 100,
-        duration: dration + 3,
+        y:100,
+        scale: 3,
+        opacity:0,
+        duration: dration + 1,
         delay: dlay + 0.8,
         ease: "power2.out"
 })
