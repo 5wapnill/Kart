@@ -5,8 +5,6 @@ let dlay = 0.2;
 let dration = 0.5;
 
 heroPage();
-
-// Don't call items() immediately - wait for products to load
 setTimeout(() => {
         items();
         ScrollTrigger.refresh();
